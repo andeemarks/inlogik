@@ -3,16 +3,10 @@
 namespace mb
 {
 
-    public class FollowCommand
+    public class FollowCommand(string userName, string projectName)
     {
-        public FollowCommand(string userName, string projectName)
-        {
-            UserName = userName;
-            ProjectName = projectName;
-        }
-
-        public string UserName { get; set; }
-        public string ProjectName { get; set; }
+        public string UserName { get; } = userName;
+        public string ProjectName { get; } = projectName;
 
         public List<Dictionary<string, string>> Execute(List<Dictionary<string, string>> currentFollows)
         {

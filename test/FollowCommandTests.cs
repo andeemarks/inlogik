@@ -6,7 +6,7 @@ using mb;
 public class FollowCommandTests
 {
     [TestMethod]
-    public void TestCommandConstructionRequiresAUserAndProjectName()
+    public void Command_Construction_Requires_User_And_Project_Name()
     {
         var command = new FollowCommand("user", "project");
 
@@ -15,7 +15,7 @@ public class FollowCommandTests
     }
 
     [TestMethod]
-    public void TestCommandExecutionAssociatesNewFollow()
+    public void Command_Execution_Associates_New_Follow()
     {
         var command = new FollowCommand("user", "project");
 
@@ -26,7 +26,7 @@ public class FollowCommandTests
     }
 
     [TestMethod]
-    public void TestCommandExecutionDoesNotMaintainDuplicateFollows()
+    public void Command_Execution_Does_Not_Maintain_Duplicate_Follows()
     {
         var command = new FollowCommand("user", "project");
 
