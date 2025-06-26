@@ -6,7 +6,7 @@ using mb;
 public class ReadCommandTests
 {
     [TestMethod]
-    public void TestCommandConstructionRequiresAProjectName()
+    public void Command_Construction_Requires_Project_Name()
     {
         var command = new ReadCommand("foo");
 
@@ -14,7 +14,7 @@ public class ReadCommandTests
     }
 
     [TestMethod]
-    public void TestCommandExecutionReturnsEmptyListForUnknownProject()
+    public void Command_Execution_Returns_Empty_List_For_Unknown_Project()
     {
         var command = new ReadCommand("foo");
 
@@ -30,7 +30,7 @@ public class ReadCommandTests
     }
 
     [TestMethod]
-    public void TestCommandExecutionReturnsMessagesForKnownProject()
+    public void Command_Execution_Returns_Messages_For_Known_Project()
     {
         var command = new ReadCommand("foo");
 
