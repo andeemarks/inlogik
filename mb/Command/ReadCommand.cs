@@ -1,5 +1,5 @@
 
-namespace mb
+namespace mb.Command
 {
 
     public class ReadCommand(string projectName)

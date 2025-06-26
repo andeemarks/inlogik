@@ -1,6 +1,6 @@
 
 
-namespace mb
+namespace mb.Command
 {
 
     public class FollowCommand(string userName, string projectName)

@@ -1,6 +1,6 @@
 namespace test;
 
-using mb;
+using mb.Command;
 
 [TestClass]
 public class FollowCommandTests
