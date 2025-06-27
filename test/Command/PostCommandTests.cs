@@ -15,4 +15,14 @@ public class PostCommandTests
         Assert.AreEqual("blech", command.Message);
     }
 
+    [TestMethod]
+    public void Factory_Can_Build_Command_From_Input()
+    {
+        var command = PostCommand.FromInput("Alice -> @Moonshot I'm working on the log on screen".Split());
+
+        Assert.AreEqual("Alice", command.UserName);
+        Assert.AreEqual("Moonshot", command.ProjectName);
+        Assert.AreEqual("I'm working on the log on screen", command.Message);
+
+    }
 }

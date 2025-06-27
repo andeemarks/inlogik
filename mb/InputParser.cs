@@ -22,8 +22,7 @@ public class InputParser
 
         if (inputComponents[1] == "->")
         {
-            var message = string.Join(' ', inputComponents.Skip(3));
-            return new PostCommand(inputComponents[0], inputComponents[2].TrimStart('@'), message);
+            return PostCommand.FromInput(inputComponents);
         }
 
         if (inputComponents[1] == "wall")
