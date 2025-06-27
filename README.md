@@ -16,7 +16,7 @@ Exception: The main input handling loop in `Program.cs` has only been manually t
 
 There is still a lot of work to be done around `Program.cs` and the main datastructures behind `MessageBoard.cs`.
 
-The approach is to construct the `MessageBoard` instance in `Program.cs` and pass it to/from each of the commands as they are instantiated by the `InputParser`.
+The approach is to construct the `MessageBoard` instance in `Program.cs` and pass it to/from each of the commands as they are instantiated by the `InputParser`.  Ideally, this contact would be codified by specifying the `execute` function in `ICommand`.
 
 The calculation of the relative timestamping for messages is currently in `Message`, but is more of a UI concern.  Ideally, only the number of minutes/millis/seconds that have passed since creation should be held in `Message` and the conversion to "1 minutes ago" (for example) should be done closer to the UI.
 
