@@ -1,6 +1,5 @@
 namespace test;
 
-using mb;
 using mb.Domain;
 
 [TestClass]
@@ -11,6 +10,14 @@ public class MessageTests
     {
         var message = new Message("foo");
 
-        Assert.IsNotNull(message.Timestamp);
+        Assert.IsInstanceOfType(message.Timestamp, typeof(DateTime));
+    }
+
+    [TestMethod]
+    public void Message_Timestamps_Are_Displayed_As_Minutes()
+    {
+        var message = new Message("foo");
+
+        Assert.AreEqual("just now", message.CreatedOn());
     }
 }
