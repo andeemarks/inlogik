@@ -46,4 +46,14 @@ public class FollowCommandTests
 
         Assert.AreEqual(1, newFollows.Count);
     }
+
+    [TestMethod]
+    public void Factory_Can_Build_Command_From_Input()
+    {
+        var command = FollowCommand.FromInput("Charlie follows Apollo".Split());
+
+        Assert.AreEqual("Charlie", command.UserName);
+        Assert.AreEqual("Apollo", command.ProjectName);
+
+    }
 }

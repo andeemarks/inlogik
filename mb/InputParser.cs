@@ -17,7 +17,7 @@ public class InputParser
 
         if (inputComponents[1] == "follows")
         {
-            return new FollowCommand(inputComponents[0], inputComponents[2]);
+            return FollowCommand.FromInput(inputComponents);
         }
 
         if (inputComponents[1] == "->")

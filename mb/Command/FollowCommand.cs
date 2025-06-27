@@ -8,6 +8,11 @@ namespace mb.Command
         public string UserName { get; } = userName;
         public string ProjectName { get; } = projectName;
 
+        public static FollowCommand FromInput(string[] input)
+        {
+            return new FollowCommand(input[0], input[2]);
+        }
+
         public List<Follow> Execute(MessageBoard context)
         {
             var currentFollows = context.Follows;
