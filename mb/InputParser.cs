@@ -1,5 +1,6 @@
 
 using mb.Command;
+using System.Linq;
 
 namespace mb;
 
@@ -17,6 +18,12 @@ public class InputParser
         if (inputComponents[1] == "follows")
         {
             return new FollowCommand(inputComponents[0], inputComponents[2]);
+        }
+
+        if (inputComponents[1] == "->")
+        {
+            var message = string.Join(' ', inputComponents.Skip(3));
+            return new PostCommand(inputComponents[0], inputComponents[2].TrimStart('@'), message);
         }
 
         throw new NotImplementedException();

@@ -25,5 +25,16 @@ public class InputParserTests
         Assert.AreEqual("Apollo", ((FollowCommand)command).ProjectName);
     }
 
+    [TestMethod]
+    public void Parser_Recognizes_A_Post_Command()
+    {
+        var command = InputParser.Parse("Alice -> @Moonshot I'm working on the log on screen");
+
+        Assert.IsInstanceOfType(command, typeof(ICommand));
+        Assert.AreEqual("Alice", ((PostCommand)command).UserName);
+        Assert.AreEqual("Moonshot", ((PostCommand)command).ProjectName);
+        Assert.AreEqual("I'm working on the log on screen", ((PostCommand)command).Message);
+    }
+
 }
 
