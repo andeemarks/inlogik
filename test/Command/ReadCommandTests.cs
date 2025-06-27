@@ -1,4 +1,4 @@
-namespace test;
+namespace test.Command;
 
 using mb.Command;
 using mb.Domain;
