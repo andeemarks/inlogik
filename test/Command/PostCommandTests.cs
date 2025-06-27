@@ -1,6 +1,7 @@
 namespace test.Command;
 
 using mb.Command;
+using mb.Domain;
 
 [TestClass]
 public class PostCommandTests
@@ -13,6 +14,18 @@ public class PostCommandTests
         Assert.AreEqual("foo", command.UserName);
         Assert.AreEqual("bar", command.ProjectName);
         Assert.AreEqual("blech", command.Message);
+    }
+
+    [TestMethod]
+    public void Command_Execution_Associates_Message_With_User_And_New_Project()
+    {
+        var command = new PostCommand("foo", "bar", "blech");
+
+        var context = new MessageBoard();
+
+        var updatedContext = command.Execute(context);
+
+        Assert.AreEqual(1, updatedContext.Messages["bar"].Count);
     }
 
     [TestMethod]

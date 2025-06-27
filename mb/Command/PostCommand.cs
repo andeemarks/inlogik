@@ -1,6 +1,9 @@
 
 
 
+
+using mb.Domain;
+
 namespace mb.Command
 {
 
@@ -14,6 +17,16 @@ namespace mb.Command
         {
             var message = string.Join(' ', input.Skip(3));
             return new PostCommand(input[0], input[2].TrimStart('@'), message);
+        }
+
+        public MessageBoard Execute(MessageBoard context)
+        {
+            var projectMessages = context.Messages.GetValueOrDefault(ProjectName, []);
+            projectMessages.Add(new Message(Message));
+
+            context.Messages[ProjectName] = projectMessages;
+
+            return context;
         }
     }
 }
