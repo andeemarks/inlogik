@@ -1,7 +1,9 @@
-﻿using mb.Command;
+﻿using mb;
+using mb.Command;
 
 while (true)
 {
     var input = Console.ReadLine();
-    Console.WriteLine(new ReadCommand("foo"));
+    var command = InputParser.Parse(input);
+    Console.WriteLine(command);
 }
