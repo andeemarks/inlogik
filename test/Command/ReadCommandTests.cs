@@ -61,7 +61,7 @@ public class ReadCommandTests
     {
         var command = ReadCommand.FromInput("Moonshot".Split());
 
-        Assert.AreEqual("Moonshot", command.ProjectName);
+        Assert.AreEqual("Moonshot", ((ReadCommand)command).ProjectName);
 
     }    
 }

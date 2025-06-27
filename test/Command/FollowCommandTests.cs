@@ -52,8 +52,8 @@ public class FollowCommandTests
     {
         var command = FollowCommand.FromInput("Charlie follows Apollo".Split());
 
-        Assert.AreEqual("Charlie", command.UserName);
-        Assert.AreEqual("Apollo", command.ProjectName);
+        Assert.AreEqual("Charlie", ((FollowCommand)command).UserName);
+        Assert.AreEqual("Apollo", ((FollowCommand)command).ProjectName);
 
     }
 }

@@ -20,9 +20,9 @@ public class PostCommandTests
     {
         var command = PostCommand.FromInput("Alice -> @Moonshot I'm working on the log on screen".Split());
 
-        Assert.AreEqual("Alice", command.UserName);
-        Assert.AreEqual("Moonshot", command.ProjectName);
-        Assert.AreEqual("I'm working on the log on screen", command.Message);
+        Assert.AreEqual("Alice", ((PostCommand)command).UserName);
+        Assert.AreEqual("Moonshot", ((PostCommand)command).ProjectName);
+        Assert.AreEqual("I'm working on the log on screen", ((PostCommand)command).Message);
 
     }
 }

@@ -11,7 +11,7 @@ public class WallCommandTests
     {
         var command = WallCommand.FromInput("Charlie wall".Split());
 
-        Assert.AreEqual("Charlie", command.UserName);
+        Assert.AreEqual("Charlie", ((WallCommand)command).UserName);
 
     }    
 }

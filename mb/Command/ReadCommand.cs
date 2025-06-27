@@ -4,11 +4,11 @@ using mb.Domain;
 namespace mb.Command
 {
 
-    public class ReadCommand(string projectName) : ICommand
+    public class ReadCommand(string projectName) : ICommand, ICommandBuilder
     {
         public string ProjectName { get; } = projectName;
 
-        public static ReadCommand FromInput(string[] input)
+        public static ICommand FromInput(string[] input)
         {
             return new ReadCommand(input[0]);
         }
