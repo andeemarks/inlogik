@@ -2,7 +2,7 @@
 namespace mb.Command
 {
 
-    public class ReadCommand(string projectName)
+    public class ReadCommand(string projectName) : ICommand
     {
         public string ProjectName { get; } = projectName;
 

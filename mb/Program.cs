@@ -1,4 +1,7 @@
 ﻿using mb.Command;
 
-// See https://aka.ms/new-console-template for more information
-Console.WriteLine(new ReadCommand("foo"));
+while (true)
+{
+    var input = Console.ReadLine();
+    Console.WriteLine(new ReadCommand("foo"));
+}

@@ -3,7 +3,7 @@
 namespace mb.Command
 {
 
-    public class FollowCommand(string userName, string projectName)
+    public class FollowCommand(string userName, string projectName) : ICommand
     {
         public string UserName { get; } = userName;
         public string ProjectName { get; } = projectName;
