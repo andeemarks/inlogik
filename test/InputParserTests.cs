@@ -15,5 +15,15 @@ public class InputParserTests
         Assert.AreEqual("Moonshot", ((ReadCommand)command).ProjectName);
     }
 
+    [TestMethod]
+    public void Parser_Recognizes_A_Follow_Command()
+    {
+        var command = InputParser.Parse("Charlie follows Apollo");
+
+        Assert.IsInstanceOfType(command, typeof(ICommand));
+        Assert.AreEqual("Charlie", ((FollowCommand)command).UserName);
+        Assert.AreEqual("Apollo", ((FollowCommand)command).ProjectName);
+    }
+
 }
 
