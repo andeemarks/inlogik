@@ -1,7 +1,9 @@
+using mb.Command;
+
 namespace mb.Domain;
 
 public class MessageBoard
 {
-    public object Follows = new();
+    public List<Follow> Follows = [];
     public object Messages = new();
 }

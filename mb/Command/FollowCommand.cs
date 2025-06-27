@@ -1,4 +1,4 @@
-
+using mb.Domain;
 
 namespace mb.Command
 {
@@ -8,9 +8,10 @@ namespace mb.Command
         public string UserName { get; } = userName;
         public string ProjectName { get; } = projectName;
 
-        public List<Dictionary<string, string>> Execute(List<Dictionary<string, string>> currentFollows)
+        public List<Follow> Execute(MessageBoard context)
         {
-            var newFollow = new Dictionary<string, string> { { UserName, ProjectName } };
+            var currentFollows = context.Follows;
+            var newFollow = new Follow(UserName, ProjectName);
 
             if (!currentFollows.Contains(newFollow))
             {

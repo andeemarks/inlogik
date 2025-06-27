@@ -1,6 +1,7 @@
 namespace test;
 
 using mb.Command;
+using mb.Domain;
 
 [TestClass]
 public class FollowCommandTests
@@ -19,10 +20,11 @@ public class FollowCommandTests
     {
         var command = new FollowCommand("user", "project");
 
-        var emptyFollows = new List<Dictionary<string, string>> { };
-        var newFollows = command.Execute(emptyFollows);
+        var context = new MessageBoard();
 
-        Assert.AreEqual("project", newFollows[0]["user"]);
+        var newFollows = command.Execute(context);
+
+        Assert.AreEqual("project", newFollows[0].ProjectName);
     }
 
     [Ignore]
@@ -31,12 +33,16 @@ public class FollowCommandTests
     {
         var command = new FollowCommand("user", "project");
 
-        var initialFollows = new List<Dictionary<string, string>>
+        var initialFollows = new List<Follow>
         {
-            new() { { "user", "project" } }
+            new("user", "project")
         };
 
-        var newFollows = command.Execute(initialFollows);
+        var context = new MessageBoard
+        {
+            Follows = initialFollows
+        };
+        var newFollows = command.Execute(context);
 
         Assert.AreEqual(1, newFollows.Count);
     }
