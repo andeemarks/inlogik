@@ -8,6 +8,11 @@ namespace mb.Command
     {
         public string ProjectName { get; } = projectName;
 
+        public static ReadCommand FromInput(string input)
+        {
+            return new ReadCommand(input);
+        }
+
         public List<Message> Execute(MessageBoard context)
         {
             try

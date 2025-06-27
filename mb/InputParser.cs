@@ -12,7 +12,7 @@ public class InputParser
 
         if (inputComponents.Length == 1)
         {
-            return new ReadCommand(input);
+            return ReadCommand.FromInput(input);
         }
 
         if (inputComponents[1] == "follows")

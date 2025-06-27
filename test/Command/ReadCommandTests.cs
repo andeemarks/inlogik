@@ -32,7 +32,7 @@ public class ReadCommandTests
         var projectMessages = command.Execute(context);
         Assert.IsNotNull(projectMessages);
         Assert.AreEqual(0, projectMessages.Count);
-        
+
     }
 
     [TestMethod]
@@ -53,6 +53,15 @@ public class ReadCommandTests
 
         var projectMessages = command.Execute(context);
         Assert.IsTrue(expectedMessages.SequenceEqual(projectMessages));
-        
+
     }
+
+    [TestMethod]
+    public void Factory_Can_Build_Command_From_Input()
+    {
+        var command = ReadCommand.FromInput("Moonshot");
+
+        Assert.AreEqual("Moonshot", command.ProjectName);
+
+    }    
 }
