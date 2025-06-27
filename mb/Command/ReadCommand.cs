@@ -1,4 +1,6 @@
 
+using mb.Domain;
+
 namespace mb.Command
 {
 
@@ -6,9 +8,16 @@ namespace mb.Command
     {
         public string ProjectName { get; } = projectName;
 
-        public List<string> Execute(Dictionary<string, List<string>> messages)
+        public List<Message> Execute(MessageBoard context)
         {
-            return messages.GetValueOrDefault(ProjectName, []);
+            try
+            {
+                return context.Messages[ProjectName];
+            }
+            catch (KeyNotFoundException)
+            {
+                return [];
+            }
         }
     }
 }

@@ -1,6 +1,7 @@
 namespace test;
 
 using mb.Command;
+using mb.Domain;
 
 [TestClass]
 public class ReadCommandTests
@@ -18,12 +19,17 @@ public class ReadCommandTests
     {
         var command = new ReadCommand("foo");
 
-        var messages = new Dictionary<string, List<string>>
+        var messages = new Dictionary<string, List<Message>>
         {
 
         };
 
-        var projectMessages = command.Execute(messages);
+        var context = new MessageBoard
+        {
+            Messages = messages
+        };
+
+        var projectMessages = command.Execute(context);
         Assert.IsNotNull(projectMessages);
         Assert.AreEqual(0, projectMessages.Count);
         
@@ -34,13 +40,18 @@ public class ReadCommandTests
     {
         var command = new ReadCommand("foo");
 
-        var expectedMessages = new List<string> { "bar", "blech" };
-        var messages = new Dictionary<string, List<string>>
+        var expectedMessages = new List<Message> { new("bar"), new("blech") };
+        var messages = new Dictionary<string, List<Message>>
         {
             {"foo", expectedMessages},
         };
 
-        var projectMessages = command.Execute(messages);
+        var context = new MessageBoard
+        {
+            Messages = messages
+        };
+
+        var projectMessages = command.Execute(context);
         Assert.IsTrue(expectedMessages.SequenceEqual(projectMessages));
         
     }

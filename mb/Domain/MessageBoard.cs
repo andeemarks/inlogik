@@ -5,5 +5,5 @@ namespace mb.Domain;
 public class MessageBoard
 {
     public List<Follow> Follows = [];
-    public object Messages = new();
+    public Dictionary<string, List<Message>> Messages = [];
 }
