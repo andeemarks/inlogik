@@ -36,5 +36,14 @@ public class InputParserTests
         Assert.AreEqual("I'm working on the log on screen", ((PostCommand)command).Message);
     }
 
+    [TestMethod]
+    public void Parser_Recognizes_A_Wall_Command()
+    {
+        var command = InputParser.Parse("Charlie wall");
+
+        Assert.IsInstanceOfType(command, typeof(ICommand));
+        Assert.AreEqual("Charlie", ((WallCommand)command).UserName);
+    }
+
 }
 

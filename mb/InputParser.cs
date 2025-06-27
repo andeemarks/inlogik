@@ -26,6 +26,11 @@ public class InputParser
             return new PostCommand(inputComponents[0], inputComponents[2].TrimStart('@'), message);
         }
 
+        if (inputComponents[1] == "wall")
+        {
+            return new WallCommand(inputComponents[0]);
+        }
+
         throw new NotImplementedException();
     }
 }
