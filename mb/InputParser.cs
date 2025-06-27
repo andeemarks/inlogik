@@ -12,7 +12,7 @@ public class InputParser
 
         if (inputComponents.Length == 1)
         {
-            return ReadCommand.FromInput(input);
+            return ReadCommand.FromInput(inputComponents);
         }
 
         if (inputComponents[1] == "follows")
@@ -27,7 +27,7 @@ public class InputParser
 
         if (inputComponents[1] == "wall")
         {
-            return new WallCommand(inputComponents[0]);
+            return WallCommand.FromInput(inputComponents);
         }
 
         throw new NotImplementedException();

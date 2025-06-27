@@ -59,7 +59,7 @@ public class ReadCommandTests
     [TestMethod]
     public void Factory_Can_Build_Command_From_Input()
     {
-        var command = ReadCommand.FromInput("Moonshot");
+        var command = ReadCommand.FromInput("Moonshot".Split());
 
         Assert.AreEqual("Moonshot", command.ProjectName);
 
