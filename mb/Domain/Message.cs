@@ -5,8 +5,21 @@ public class Message(string text="")
     public string Text { get; } = text;
     public DateTime Timestamp { get; } = DateTime.Now;
 
-    public string CreatedOn()
+    public string CreatedOn(DateTime currentTime)
     {
-        return "just now";
+        TimeSpan timeSinceCreation = currentTime.Subtract(Timestamp);
+
+        if (timeSinceCreation.TotalMinutes < 1)
+        {
+            return "just now";
+        }
+        else if (timeSinceCreation.TotalMinutes < 2)
+        {
+            return "1 minute ago";
+        }
+        else
+        {
+            return $"{timeSinceCreation.TotalMinutes:F0} minutes ago";
+        }
     }
 }

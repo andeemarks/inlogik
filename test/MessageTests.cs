@@ -18,6 +18,11 @@ public class MessageTests
     {
         var message = new Message("foo");
 
-        Assert.AreEqual("just now", message.CreatedOn());
+        var now = DateTime.Now;
+
+        Assert.AreEqual("just now", message.CreatedOn(now.AddMinutes(0)));
+        Assert.AreEqual("1 minute ago", message.CreatedOn(now.AddMinutes(1)));
+        Assert.AreEqual("2 minutes ago", message.CreatedOn(now.AddMinutes(2)));
+        Assert.AreEqual("56 minutes ago", message.CreatedOn(now.AddMinutes(56)));
     }
 }
