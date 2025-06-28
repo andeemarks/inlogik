@@ -13,7 +13,7 @@ namespace mb.Command
             return new FollowCommand(input[0], input[2]);
         }
 
-        public List<Follow> Execute(MessageBoard context)
+        public MessageBoard Execute(MessageBoard context)
         {
             var currentFollows = context.Follows;
             var newFollow = new Follow(UserName, ProjectName);
@@ -23,7 +23,9 @@ namespace mb.Command
                 currentFollows.Add(newFollow);
             }
 
-            return currentFollows;
+            context.Follows = currentFollows;
+
+            return context;
         }
     }
 }

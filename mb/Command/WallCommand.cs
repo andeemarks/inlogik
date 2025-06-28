@@ -1,6 +1,8 @@
 
 
 
+using mb.Domain;
+
 namespace mb.Command
 {
 
@@ -11,6 +13,11 @@ namespace mb.Command
         public static ICommand FromInput(string[] input)
         {
             return new WallCommand(input[0]);
+        }
+
+        public MessageBoard Execute(MessageBoard context)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -13,16 +13,9 @@ namespace mb.Command
             return new ReadCommand(input[0]);
         }
 
-        public List<Message> Execute(MessageBoard context)
+        public MessageBoard Execute(MessageBoard context)
         {
-            try
-            {
-                return context.Messages[ProjectName];
-            }
-            catch (KeyNotFoundException)
-            {
-                return [];
-            }
+            return context;
         }
     }
 }

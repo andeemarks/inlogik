@@ -22,9 +22,9 @@ public class FollowCommandTests
 
         var context = new MessageBoard();
 
-        var newFollows = command.Execute(context);
+        var updatedContext = command.Execute(context);
 
-        Assert.AreEqual("project", newFollows[0].ProjectName);
+        Assert.AreEqual("project", updatedContext.Follows[0].ProjectName);
     }
 
     [Ignore]
@@ -42,9 +42,9 @@ public class FollowCommandTests
         {
             Follows = initialFollows
         };
-        var newFollows = command.Execute(context);
+        var updatedContext = command.Execute(context);
 
-        Assert.AreEqual(1, newFollows.Count);
+        Assert.AreEqual(1, updatedContext.Follows.Count);
     }
 
     [TestMethod]

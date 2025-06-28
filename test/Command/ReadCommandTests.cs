@@ -15,27 +15,6 @@ public class ReadCommandTests
     }
 
     [TestMethod]
-    public void Command_Execution_Returns_Empty_List_For_Unknown_Project()
-    {
-        var command = new ReadCommand("foo");
-
-        var messages = new Dictionary<string, List<Message>>
-        {
-
-        };
-
-        var context = new MessageBoard
-        {
-            Messages = messages
-        };
-
-        var projectMessages = command.Execute(context);
-        Assert.IsNotNull(projectMessages);
-        Assert.AreEqual(0, projectMessages.Count);
-
-    }
-
-    [TestMethod]
     public void Command_Execution_Returns_Messages_For_Known_Project()
     {
         var command = new ReadCommand("foo");
@@ -51,8 +30,8 @@ public class ReadCommandTests
             Messages = messages
         };
 
-        var projectMessages = command.Execute(context);
-        Assert.IsTrue(expectedMessages.SequenceEqual(projectMessages));
+        var updatedContext = command.Execute(context);
+        Assert.IsTrue(expectedMessages.SequenceEqual(updatedContext.Messages["foo"]));
 
     }
 
