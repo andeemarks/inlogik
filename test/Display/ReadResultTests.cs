@@ -27,4 +27,17 @@ public class ReadResultTests
         Assert.IsTrue(result[3].StartsWith("third"));
     }
 
+    [TestMethod]
+    public void Result_Empty_For_Unknown_Project()
+    {
+        var context = new MessageBoard
+        {
+            Messages = []
+        };
+
+        var result = ReadResult.For(context, new ReadCommand("project"));
+
+        Assert.AreEqual(0, result.Length);
+    }
+
 }
