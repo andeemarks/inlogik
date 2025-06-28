@@ -17,7 +17,7 @@ namespace mb.Command
 
         public MessageBoard Execute(MessageBoard context)
         {
-            throw new NotImplementedException();
+            return context;
         }
     }
 }
