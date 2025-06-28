@@ -1,10 +1,14 @@
 namespace mb.Domain;
 
-public class Message(string text="")
+public class Message(string text = "")
 {
     public string Text { get; } = text;
     public DateTime Timestamp { get; } = DateTime.Now;
 
+    private string CreatedOn()
+    {
+        return CreatedOn(DateTime.Now);
+    }
     public string CreatedOn(DateTime currentTime)
     {
         TimeSpan timeSinceCreation = currentTime.Subtract(Timestamp);
@@ -22,4 +26,10 @@ public class Message(string text="")
             return $"{timeSinceCreation.TotalMinutes:F0} minutes ago";
         }
     }
+
+    public override string ToString()
+    {
+        return $"{Text} ({CreatedOn()})";
+    }
+
 }
