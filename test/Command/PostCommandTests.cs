@@ -52,6 +52,17 @@ public class PostCommandTests
     }
 
     [TestMethod]
+    public void Command_Execution_Does_Not_Produce_Output()
+    {
+        var command = new PostCommand("foo", "bar", "blech");
+        var context = new MessageBoard();
+
+        var updatedContext = command.Execute(context);
+
+        Assert.IsNull(updatedContext.Output);
+    }
+
+    [TestMethod]
     public void Factory_Can_Build_Command_From_Input()
     {
         var command = PostCommand.FromInput("Alice -> @Moonshot I'm working on the log on screen".Split());

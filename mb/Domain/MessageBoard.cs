@@ -8,6 +8,8 @@ public class MessageBoard
     public List<Follow> Follows = [];
     public Dictionary<string, List<Message>> Messages = [];
 
+    public string? Output { get; set; }
+
     public override String ToString()
     {
         StringBuilder result = new StringBuilder();

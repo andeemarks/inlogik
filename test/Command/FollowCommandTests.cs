@@ -48,6 +48,17 @@ public class FollowCommandTests
     }
 
     [TestMethod]
+    public void Command_Execution_Does_Not_Produce_Output()
+    {
+        var command = new FollowCommand("user", "project");
+        var context = new MessageBoard();
+
+        var updatedContext = command.Execute(context);
+
+        Assert.IsNull(updatedContext.Output);
+    }
+
+    [TestMethod]
     public void Factory_Can_Build_Command_From_Input()
     {
         var command = FollowCommand.FromInput("Charlie follows Apollo".Split());

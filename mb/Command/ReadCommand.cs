@@ -15,6 +15,8 @@ namespace mb.Command
 
         public MessageBoard Execute(MessageBoard context)
         {
+            context.Output = context.Messages[ProjectName].ToString();
+            
             return context;
         }
     }
