@@ -1,4 +1,5 @@
 
+using mb.Display;
 using mb.Domain;
 
 namespace mb.Command
@@ -15,8 +16,8 @@ namespace mb.Command
 
         public MessageBoard Execute(MessageBoard context)
         {
-            context.Output = context.Messages[ProjectName].ToString();
-            
+            context.Output = ReadResult.For(context, this);
+
             return context;
         }
     }

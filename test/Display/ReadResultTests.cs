@@ -3,7 +3,6 @@ namespace test.Display;
 using mb.Command;
 using mb.Domain;
 using mb.Display;
-using System.Linq.Expressions;
 
 [TestClass]
 public class ReadResultTests
