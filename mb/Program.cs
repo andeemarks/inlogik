@@ -8,5 +8,5 @@ while (true)
     var input = Console.ReadLine();
     var command = InputParser.Parse(input);
     context = command.Execute(context);
-    Console.WriteLine(context);
+    Console.WriteLine(context.Output);
 }
