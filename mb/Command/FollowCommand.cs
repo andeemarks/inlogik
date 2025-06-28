@@ -24,6 +24,7 @@ namespace mb.Command
             }
 
             context.Follows = currentFollows;
+            context.Output = null;
 
             return context;
         }

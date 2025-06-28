@@ -51,7 +51,10 @@ public class FollowCommandTests
     public void Command_Execution_Does_Not_Produce_Output()
     {
         var command = new FollowCommand("user", "project");
-        var context = new MessageBoard();
+        var context = new MessageBoard
+        {
+            Output = [""]
+        };
 
         var updatedContext = command.Execute(context);
 

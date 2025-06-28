@@ -8,5 +8,16 @@ while (true)
     var input = Console.ReadLine();
     var command = InputParser.Parse(input);
     context = command.Execute(context);
-    Console.WriteLine(context.Output);
+    ShowOutput(context);
+}
+
+static void ShowOutput(MessageBoard context)
+{
+    if (context != null)
+    {
+        foreach (var line in context.Output)
+        {
+            Console.WriteLine(line);
+        }    
+    }
 }

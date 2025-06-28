@@ -3,6 +3,7 @@ namespace test.Command;
 using mb.Command;
 using mb.Domain;
 using Microsoft.VisualBasic;
+using Microsoft.VisualStudio.TestPlatform.Utilities;
 
 [TestClass]
 public class PostCommandTests
@@ -55,7 +56,10 @@ public class PostCommandTests
     public void Command_Execution_Does_Not_Produce_Output()
     {
         var command = new PostCommand("foo", "bar", "blech");
-        var context = new MessageBoard();
+        var context = new MessageBoard
+        {
+            Output = ["foo"]
+        };
 
         var updatedContext = command.Execute(context);
 

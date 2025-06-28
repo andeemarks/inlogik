@@ -25,6 +25,7 @@ namespace mb.Command
             projectMessages.Add(new Message(Message));
 
             context.Messages[ProjectName] = projectMessages;
+            context.Output = null;
 
             return context;
         }

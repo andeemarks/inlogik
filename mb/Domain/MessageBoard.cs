@@ -1,5 +1,4 @@
 using System.Text;
-using mb.Command;
 
 namespace mb.Domain;
 
@@ -10,7 +9,7 @@ public class MessageBoard
 
     public string[]? Output { get; set; }
 
-    public override String ToString()
+    public override string ToString()
     {
         StringBuilder result = new StringBuilder();
 
