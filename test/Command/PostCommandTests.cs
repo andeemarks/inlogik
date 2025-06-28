@@ -2,6 +2,7 @@ namespace test.Command;
 
 using mb.Command;
 using mb.Domain;
+using Microsoft.VisualBasic;
 
 [TestClass]
 public class PostCommandTests
@@ -19,13 +20,35 @@ public class PostCommandTests
     [TestMethod]
     public void Command_Execution_Associates_Message_With_User_And_New_Project()
     {
-        var command = new PostCommand("foo", "bar", "blech");
+        var projectName = "Bar";
+        var command = new PostCommand("foo", projectName, "blech");
 
         var context = new MessageBoard();
 
         var updatedContext = command.Execute(context);
 
-        Assert.AreEqual(1, updatedContext.Messages["bar"].Count);
+        Assert.AreEqual(1, updatedContext.Messages[projectName].Count);
+    }
+
+    [TestMethod]
+    public void Command_Execution_Associates_Message_With_User_And_Existing_Project()
+    {
+        var projectName = "Bar";
+        var command = new PostCommand("foo", projectName, "blech");
+
+        var messages = new Dictionary<string, List<Message>>
+        {
+            [projectName] = [new Message("message")]
+        };
+
+        var context = new MessageBoard
+        {
+            Messages = messages
+        };
+
+        var updatedContext = command.Execute(context);
+
+        Assert.AreEqual(2, updatedContext.Messages[projectName].Count);
     }
 
     [TestMethod]
