@@ -23,7 +23,7 @@ public class ReadResult
                 displayedUserNames.Add(message.UserName);
                 result.Add(message.UserName);
             }
-            result.Add(message.Text);
+            result.Add(message.ToString());
         }
 
         return [.. result];
