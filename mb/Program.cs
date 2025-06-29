@@ -13,7 +13,7 @@ while (true)
 
 static void ShowOutput(MessageBoard context)
 {
-    if (context != null)
+    if (context.Output != null)
     {
         foreach (var line in context.Output)
         {

@@ -1,6 +1,7 @@
 
 
 
+using mb.Display;
 using mb.Domain;
 
 namespace mb.Command
@@ -17,7 +18,7 @@ namespace mb.Command
 
         public MessageBoard Execute(MessageBoard context)
         {
-            context.Output = ["foo"];
+            context.Output = WallResult.For(context, this);
 
             return context;
         }

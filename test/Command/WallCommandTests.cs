@@ -28,24 +28,30 @@ public class WallCommandTests
     }
 
     [TestMethod]
-    public void Command_Execution_Output_Are_User_Subscriptions()
+    public void Command_Execution_Output_Are_User_Follows()
     {
-        var command = new WallCommand("foo");
+        var user = "bar";
+        var project = "foo";
+        var command = new WallCommand(user);
 
-        var expectedMessages = new List<Message> { new("bar"), new("blech") };
+        var userMessages = new List<Message> { new("blech") };
+        var otherMessages = new List<Message> { new("otherMessage") };
         var messages = new Dictionary<string, List<Message>>
         {
-            {"foo", expectedMessages},
+            {project, userMessages},
+            {"otherProject", otherMessages},
         };
 
         var context = new MessageBoard
         {
-            Messages = messages
+            Messages = messages,
+            Follows = [new Follow(user, project)]
         };
 
         var updatedContext = command.Execute(context);
-        Assert.IsNotNull(updatedContext.Output);
+        Assert.AreEqual(1, updatedContext.Output.Length);
     }
+
     [TestMethod]
     public void Factory_Can_Build_Command_From_Input()
     {
