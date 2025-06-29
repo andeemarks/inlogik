@@ -1,8 +1,9 @@
 namespace mb.Domain;
 
-public class Message(string text = "")
+public class Message(string text, string userName)
 {
     public string Text { get; } = text;
+    public string UserName { get; } = userName;
     public DateTime Timestamp { get; } = DateTime.Now;
 
     private string CreatedOn()

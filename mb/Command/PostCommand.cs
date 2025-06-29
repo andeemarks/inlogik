@@ -22,7 +22,7 @@ namespace mb.Command
         public MessageBoard Execute(MessageBoard context)
         {
             var projectMessages = context.Messages.GetValueOrDefault(ProjectName, []);
-            projectMessages.Add(new Message(Message));
+            projectMessages.Add(new Message(Message, UserName));
 
             context.Messages[ProjectName] = projectMessages;
             context.Output = null;

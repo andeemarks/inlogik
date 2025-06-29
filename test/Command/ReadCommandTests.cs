@@ -19,7 +19,7 @@ public class ReadCommandTests
     {
         var command = new ReadCommand("foo");
 
-        var expectedMessages = new List<Message> { new("bar"), new("blech") };
+        var expectedMessages = new List<Message> { new("bar", "user"), new("blech", "user") };
         var messages = new Dictionary<string, List<Message>>
         {
             {"foo", expectedMessages},
@@ -40,7 +40,7 @@ public class ReadCommandTests
     {
         var command = new ReadCommand("foo");
 
-        var expectedMessages = new List<Message> { new("bar"), new("blech") };
+        var expectedMessages = new List<Message> { new("bar", "user"), new("blech", "user") };
         var messages = new Dictionary<string, List<Message>>
         {
             {"foo", expectedMessages},

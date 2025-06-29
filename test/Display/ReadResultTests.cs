@@ -12,7 +12,7 @@ public class ReadResultTests
     {
         var messages = new Dictionary<string, List<Message>>
         {
-            ["project"] = [new Message("first"), new Message("second"), new Message("third")]
+            ["project"] = [new Message("first", "user"), new Message("second", "user"), new Message("third", "user")]
         };
         var context = new MessageBoard
         {

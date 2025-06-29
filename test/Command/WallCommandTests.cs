@@ -11,7 +11,7 @@ public class WallCommandTests
     {
         var command = new WallCommand("foo");
 
-        var expectedMessages = new List<Message> { new("bar"), new("blech") };
+        var expectedMessages = new List<Message> { new("bar", "user"), new("blech", "user") };
         var messages = new Dictionary<string, List<Message>>
         {
             {"foo", expectedMessages},
@@ -34,8 +34,8 @@ public class WallCommandTests
         var project = "foo";
         var command = new WallCommand(user);
 
-        var userMessages = new List<Message> { new("blech") };
-        var otherMessages = new List<Message> { new("otherMessage") };
+        var userMessages = new List<Message> { new("blech", user) };
+        var otherMessages = new List<Message> { new("otherMessage", "otherUser") };
         var messages = new Dictionary<string, List<Message>>
         {
             {project, userMessages},

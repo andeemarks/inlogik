@@ -8,7 +8,7 @@ public class MessageTests
     [TestMethod]
     public void Message_Timestamps_Creation()
     {
-        var message = new Message("foo");
+        var message = new Message("foo", "user");
 
         Assert.IsInstanceOfType(message.Timestamp, typeof(DateTime));
     }
@@ -16,7 +16,7 @@ public class MessageTests
     [TestMethod]
     public void Message_Timestamps_Are_Displayed_As_Minutes()
     {
-        var message = new Message("foo");
+        var message = new Message("foo", "user");
 
         var now = DateTime.Now;
 

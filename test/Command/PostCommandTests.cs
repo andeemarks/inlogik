@@ -39,7 +39,7 @@ public class PostCommandTests
 
         var messages = new Dictionary<string, List<Message>>
         {
-            [projectName] = [new Message("message")]
+            [projectName] = [new Message("message", "foo")]
         };
 
         var context = new MessageBoard
