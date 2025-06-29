@@ -9,6 +9,11 @@ public class MessageBoard
 
     public string[]? Output { get; set; }
 
+    public List<Message> TimeLineForProject(string projectName)
+    {
+        return [.. Messages[projectName].OrderBy(m => m.Timestamp)];
+    }
+
     public override string ToString()
     {
         StringBuilder result = new StringBuilder();
