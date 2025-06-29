@@ -1,10 +1,10 @@
 namespace mb.Domain;
 
-public class Message(string text, string userName)
+public class Message(string text, string userName, DateTime? timeStamp = null)
 {
     public string Text { get; } = text;
     public string UserName { get; } = userName;
-    public DateTime Timestamp { get; } = DateTime.Now;
+    public DateTime? Timestamp { get; } = timeStamp == null ? DateTime.Now : timeStamp;
 
     private string CreatedOn()
     {
@@ -12,7 +12,7 @@ public class Message(string text, string userName)
     }
     public string CreatedOn(DateTime currentTime)
     {
-        TimeSpan timeSinceCreation = currentTime.Subtract(Timestamp);
+        TimeSpan timeSinceCreation = currentTime.Subtract((DateTime)Timestamp);
 
         if (timeSinceCreation.TotalMinutes < 1)
         {

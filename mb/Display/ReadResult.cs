@@ -15,10 +15,15 @@ public class ReadResult
             return [];
         }
 
-        result.Add(command.ProjectName);
-        foreach (var message in context.Messages[command.ProjectName])
+        var displayedUserNames = new List<string>();
+        foreach (var message in context.TimeLineForProject(command.ProjectName))
         {
-            result.Add(message.ToString());
+            if (!displayedUserNames.Contains(message.UserName))
+            {
+                displayedUserNames.Add(message.UserName);
+                result.Add(message.UserName);
+            }
+            result.Add(message.Text);
         }
 
         return [.. result];
