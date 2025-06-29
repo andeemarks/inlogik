@@ -23,7 +23,9 @@ public class WallResultTests
 
         var result = WallResult.For(context, new WallCommand("user"));
 
-        Assert.AreEqual(3, result.Length);
+        Assert.IsTrue(result[0].StartsWith("project - first"));
+        Assert.IsTrue(result[1].StartsWith("project - second"));
+        Assert.IsTrue(result[2].StartsWith("project - third"));
     }
 
     [TestMethod]

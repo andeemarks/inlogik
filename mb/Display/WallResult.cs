@@ -15,7 +15,7 @@ public class WallResult
             var projectMessages = context.Messages[projectName];
             foreach (var message in projectMessages)
             {
-                result.Add(message.ToString());
+                result.Add($"{projectName} - {message}");
             }
         }
 
