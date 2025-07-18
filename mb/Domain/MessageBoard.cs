@@ -4,8 +4,8 @@ namespace mb.Domain;
 
 public class MessageBoard
 {
-    public List<Follow> Follows = [];
-    public Dictionary<string, List<Message>> Messages = [];
+    public List<Follow> Follows { get; set; } = [];
+    public Dictionary<string, List<Message>> Messages { get; set; } = [];
 
     public string[]? Output { get; set; }
 
