@@ -18,10 +18,8 @@ public class MessageBoard
     {
         var wallLines = new List<WallLine>();
         
-        // Get all projects that the user follows
         var followedProjects = Follows.Where(f => f.UserName == userName).Select(f => f.ProjectName);
         
-        // Collect all messages from followed projects
         foreach (var projectName in followedProjects)
         {
             if (Messages.ContainsKey(projectName))
@@ -33,7 +31,6 @@ public class MessageBoard
             }
         }
         
-        // Order by timestamp (oldest first to match the test expectation)
         return wallLines.OrderBy(wl => wl.Message.Timestamp).ToList();
     }
 
