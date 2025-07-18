@@ -12,7 +12,7 @@ public class Message(string text, string userName, DateTime? timeStamp = null)
     }
     public string CreatedOn(DateTime currentTime)
     {
-        TimeSpan timeSinceCreation = currentTime.Subtract((DateTime)Timestamp);
+        TimeSpan timeSinceCreation = currentTime.Subtract(Timestamp ?? DateTime.Now);
 
         if (timeSinceCreation.TotalMinutes < 1)
         {

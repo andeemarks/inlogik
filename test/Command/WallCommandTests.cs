@@ -49,7 +49,7 @@ public class WallCommandTests
         };
 
         var updatedContext = command.Execute(context);
-        Assert.AreEqual(1, updatedContext.Output.Length);
+        Assert.AreEqual(1, updatedContext.Output?.Length);
     }
 
     [TestMethod]

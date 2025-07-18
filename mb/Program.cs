@@ -6,6 +6,7 @@ var context = new MessageBoard();
 while (true)
 {
     var input = Console.ReadLine();
+    if (input == null) break;
     var command = InputParser.Parse(input);
     context = command.Execute(context);
     ShowOutput(context);
