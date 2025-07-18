@@ -1,10 +1,26 @@
 
 
+
+using mb.Display;
+using mb.Domain;
+
 namespace mb.Command
 {
 
-    public class WallCommand(string userName) : ICommand
+    public class WallCommand(string userName) : ICommand, ICommandBuilder
     {
         public string UserName { get; } = userName;
+
+        public static ICommand FromInput(string[] input)
+        {
+            return new WallCommand(input[0]);
+        }
+
+        public MessageBoard Execute(MessageBoard context)
+        {
+            context.Output = WallResult.For(context, this);
+
+            return context;
+        }
     }
 }

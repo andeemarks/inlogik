@@ -4,20 +4,12 @@ using mb.Command;
 using mb.Domain;
 
 [TestClass]
-public class ReadCommandTests
+public class WallCommandTests
 {
-    [TestMethod]
-    public void Command_Construction_Requires_Project_Name()
-    {
-        var command = new ReadCommand("foo");
-
-        Assert.AreEqual("foo", command.ProjectName);
-    }
-
     [TestMethod]
     public void Command_Execution_Returns_Messages_For_Known_Project()
     {
-        var command = new ReadCommand("foo");
+        var command = new WallCommand("foo");
 
         var expectedMessages = new List<Message> { new("bar", "user"), new("blech", "user") };
         var messages = new Dictionary<string, List<Message>>
@@ -36,31 +28,36 @@ public class ReadCommandTests
     }
 
     [TestMethod]
-    public void Command_Execution_Output_Are_Project_Messages()
+    public void Command_Execution_Output_Are_User_Follows()
     {
-        var command = new ReadCommand("foo");
+        var user = "bar";
+        var project = "foo";
+        var command = new WallCommand(user);
 
-        var expectedMessages = new List<Message> { new("bar", "user"), new("blech", "user") };
+        var userMessages = new List<Message> { new("blech", user) };
+        var otherMessages = new List<Message> { new("otherMessage", "otherUser") };
         var messages = new Dictionary<string, List<Message>>
         {
-            {"foo", expectedMessages},
+            {project, userMessages},
+            {"otherProject", otherMessages},
         };
 
         var context = new MessageBoard
         {
-            Messages = messages
+            Messages = messages,
+            Follows = [new Follow(user, project)]
         };
 
         var updatedContext = command.Execute(context);
-        Assert.IsNotNull(updatedContext.Output);
+        Assert.AreEqual(1, updatedContext.Output.Length);
     }
 
     [TestMethod]
     public void Factory_Can_Build_Command_From_Input()
     {
-        var command = ReadCommand.FromInput("Moonshot".Split());
+        var command = WallCommand.FromInput("Charlie wall".Split());
 
-        Assert.AreEqual("Moonshot", ((ReadCommand)command).ProjectName);
+        Assert.AreEqual("Charlie", ((WallCommand)command).UserName);
 
     }    
 }

@@ -22,9 +22,9 @@ public class FollowCommandTests
 
         var context = new MessageBoard();
 
-        var newFollows = command.Execute(context);
+        var updatedContext = command.Execute(context);
 
-        Assert.AreEqual("project", newFollows[0].ProjectName);
+        Assert.AreEqual("project", updatedContext.Follows[0].ProjectName);
     }
 
     [Ignore]
@@ -42,8 +42,32 @@ public class FollowCommandTests
         {
             Follows = initialFollows
         };
-        var newFollows = command.Execute(context);
+        var updatedContext = command.Execute(context);
 
-        Assert.AreEqual(1, newFollows.Count);
+        Assert.AreEqual(1, updatedContext.Follows.Count);
+    }
+
+    [TestMethod]
+    public void Command_Execution_Does_Not_Produce_Output()
+    {
+        var command = new FollowCommand("user", "project");
+        var context = new MessageBoard
+        {
+            Output = [""]
+        };
+
+        var updatedContext = command.Execute(context);
+
+        Assert.IsNull(updatedContext.Output);
+    }
+
+    [TestMethod]
+    public void Factory_Can_Build_Command_From_Input()
+    {
+        var command = FollowCommand.FromInput("Charlie follows Apollo".Split());
+
+        Assert.AreEqual("Charlie", ((FollowCommand)command).UserName);
+        Assert.AreEqual("Apollo", ((FollowCommand)command).ProjectName);
+
     }
 }

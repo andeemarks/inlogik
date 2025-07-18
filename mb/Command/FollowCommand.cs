@@ -3,12 +3,17 @@ using mb.Domain;
 namespace mb.Command
 {
 
-    public class FollowCommand(string userName, string projectName) : ICommand
+    public class FollowCommand(string userName, string projectName) : ICommand, ICommandBuilder
     {
         public string UserName { get; } = userName;
         public string ProjectName { get; } = projectName;
 
-        public List<Follow> Execute(MessageBoard context)
+        public static ICommand FromInput(string[] input)
+        {
+            return new FollowCommand(input[0], input[2]);
+        }
+
+        public MessageBoard Execute(MessageBoard context)
         {
             var currentFollows = context.Follows;
             var newFollow = new Follow(UserName, ProjectName);
@@ -18,7 +23,10 @@ namespace mb.Command
                 currentFollows.Add(newFollow);
             }
 
-            return currentFollows;
+            context.Follows = currentFollows;
+            context.Output = null;
+
+            return context;
         }
     }
 }

@@ -1,6 +1,9 @@
 namespace test.Command;
 
 using mb.Command;
+using mb.Domain;
+using Microsoft.VisualBasic;
+using Microsoft.VisualStudio.TestPlatform.Utilities;
 
 [TestClass]
 public class PostCommandTests
@@ -15,4 +18,62 @@ public class PostCommandTests
         Assert.AreEqual("blech", command.Message);
     }
 
+    [TestMethod]
+    public void Command_Execution_Associates_Message_With_User_And_New_Project()
+    {
+        var projectName = "Bar";
+        var command = new PostCommand("foo", projectName, "blech");
+
+        var context = new MessageBoard();
+
+        var updatedContext = command.Execute(context);
+
+        Assert.AreEqual(1, updatedContext.Messages[projectName].Count);
+    }
+
+    [TestMethod]
+    public void Command_Execution_Associates_Message_With_User_And_Existing_Project()
+    {
+        var projectName = "Bar";
+        var command = new PostCommand("foo", projectName, "blech");
+
+        var messages = new Dictionary<string, List<Message>>
+        {
+            [projectName] = [new Message("message", "foo")]
+        };
+
+        var context = new MessageBoard
+        {
+            Messages = messages
+        };
+
+        var updatedContext = command.Execute(context);
+
+        Assert.AreEqual(2, updatedContext.Messages[projectName].Count);
+    }
+
+    [TestMethod]
+    public void Command_Execution_Does_Not_Produce_Output()
+    {
+        var command = new PostCommand("foo", "bar", "blech");
+        var context = new MessageBoard
+        {
+            Output = ["foo"]
+        };
+
+        var updatedContext = command.Execute(context);
+
+        Assert.IsNull(updatedContext.Output);
+    }
+
+    [TestMethod]
+    public void Factory_Can_Build_Command_From_Input()
+    {
+        var command = PostCommand.FromInput("Alice -> @Moonshot I'm working on the log on screen".Split());
+
+        Assert.AreEqual("Alice", ((PostCommand)command).UserName);
+        Assert.AreEqual("Moonshot", ((PostCommand)command).ProjectName);
+        Assert.AreEqual("I'm working on the log on screen", ((PostCommand)command).Message);
+
+    }
 }

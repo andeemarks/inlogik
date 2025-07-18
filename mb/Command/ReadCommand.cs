@@ -1,23 +1,24 @@
 
+using mb.Display;
 using mb.Domain;
 
 namespace mb.Command
 {
 
-    public class ReadCommand(string projectName) : ICommand
+    public class ReadCommand(string projectName) : ICommand, ICommandBuilder
     {
         public string ProjectName { get; } = projectName;
 
-        public List<Message> Execute(MessageBoard context)
+        public static ICommand FromInput(string[] input)
         {
-            try
-            {
-                return context.Messages[ProjectName];
-            }
-            catch (KeyNotFoundException)
-            {
-                return [];
-            }
+            return new ReadCommand(input[0]);
+        }
+
+        public MessageBoard Execute(MessageBoard context)
+        {
+            context.Output = ReadResult.For(context, this);
+
+            return context;
         }
     }
 }
