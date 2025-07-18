@@ -14,7 +14,7 @@ public class ReadResultTests
 
         var messages = new Dictionary<string, List<Message>>
         {
-            ["project"] = [new Message("second", "user1", timeStamp), new Message("third", "user2", timeStamp.AddMinutes(1)), new Message("first", "user1", timeStamp.AddMinutes(-1))]
+            ["project"] = [new Message("second", "user1", timeStamp), new Message("third", "user2", timeStamp.AddSeconds(1)), new Message("first", "user1", timeStamp.AddSeconds(-1))]
         };
         var context = new MessageBoard
         {
@@ -24,10 +24,10 @@ public class ReadResultTests
         var result = ReadResult.For(context, new ReadCommand("project"));
 
         Assert.AreEqual("user1", result[0]);
-        Assert.IsTrue(result[1].StartsWith("first"));
-        Assert.IsTrue(result[2].StartsWith("second"));
+        Assert.AreEqual("first (just now)", result[1]);
+        Assert.AreEqual("second (just now)", result[2]);
         Assert.AreEqual("user2", result[3]);
-        Assert.IsTrue(result[4].StartsWith("third"));
+        Assert.AreEqual("third (just now)", result[4]);
     }
 
     [TestMethod]

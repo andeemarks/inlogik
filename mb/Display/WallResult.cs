@@ -7,16 +7,12 @@ public class WallResult
 {
     public static string[] For(MessageBoard context, WallCommand command)
     {
-        List<string> result = [];
-        var followedProjects = context.Follows.FindAll(f => f.UserName == command.UserName);
-        foreach (var follow in followedProjects)
+        var timeline = context.TimeLineForUser(command.UserName);
+        var result = new List<string>();
+        
+        foreach (var wallLine in timeline)
         {
-            var projectName = follow.ProjectName;
-            var projectMessages = context.Messages[projectName];
-            foreach (var message in projectMessages)
-            {
-                result.Add($"{projectName} - {message}");
-            }
+            result.Add($"{wallLine.ProjectName} - {wallLine.Message.UserName}: {wallLine.Message}");
         }
 
         return [.. result];

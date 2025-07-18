@@ -33,4 +33,17 @@ public class Message(string text, string userName, DateTime? timeStamp = null)
         return $"{Text} ({CreatedOn()})";
     }
 
+    public override bool Equals(object? obj)
+    {
+        if (obj is Message other)
+        {
+            return Text == other.Text && UserName == other.UserName && Timestamp == other.Timestamp;
+        }
+        return false;
+    }
+
+    public override int GetHashCode()
+    {
+        return HashCode.Combine(Text, UserName, Timestamp);
+    }
 }

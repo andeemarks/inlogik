@@ -14,6 +14,29 @@ public class MessageBoard
         return [.. Messages[projectName].OrderBy(m => m.Timestamp)];
     }
 
+    public List<WallLine> TimeLineForUser(string userName)
+    {
+        var wallLines = new List<WallLine>();
+        
+        // Get all projects that the user follows
+        var followedProjects = Follows.Where(f => f.UserName == userName).Select(f => f.ProjectName);
+        
+        // Collect all messages from followed projects
+        foreach (var projectName in followedProjects)
+        {
+            if (Messages.ContainsKey(projectName))
+            {
+                foreach (var message in Messages[projectName])
+                {
+                    wallLines.Add(new WallLine(projectName, message));
+                }
+            }
+        }
+        
+        // Order by timestamp (oldest first to match the test expectation)
+        return wallLines.OrderBy(wl => wl.Message.Timestamp).ToList();
+    }
+
     public override string ToString()
     {
         StringBuilder result = new StringBuilder();
