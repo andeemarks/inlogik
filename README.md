@@ -12,6 +12,55 @@ Because of the TDD approach, there is a lot of stateless code to support easier 
 
 Exception: The main input handling loop in `Program.cs` has only been manually tested.
 
+## Architecture Flow
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant Program
+    participant InputParser
+    participant Command
+    participant MessageBoard
+    participant Display
+
+    User->>Program: Enter command (e.g., "Alice -> @ProjectX Hello")
+    Program->>InputParser: Parse(input)
+    InputParser->>InputParser: Analyze input pattern
+    
+    alt Post Message
+        InputParser->>Command: Create PostCommand
+        Program->>Command: Execute(context)
+        Command->>MessageBoard: Add message to project
+        MessageBoard-->>Command: Updated context
+        Command-->>Program: Updated MessageBoard
+    else Follow User
+        InputParser->>Command: Create FollowCommand  
+        Program->>Command: Execute(context)
+        Command->>MessageBoard: Add follow relationship
+        MessageBoard-->>Command: Updated context
+        Command-->>Program: Updated MessageBoard
+    else Read Project
+        InputParser->>Command: Create ReadCommand
+        Program->>Command: Execute(context)
+        Command->>MessageBoard: Get project messages
+        MessageBoard-->>Command: Messages list
+        Command->>Display: Format messages
+        Display-->>Command: Formatted output
+        Command-->>Program: Updated context with output
+    else View Wall
+        InputParser->>Command: Create WallCommand
+        Program->>Command: Execute(context)
+        Command->>MessageBoard: Get user timeline
+        MessageBoard-->>Command: Wall lines
+        Command->>Display: Format wall display
+        Display-->>Command: Formatted output
+        Command-->>Program: Updated context with output
+    end
+    
+    Program->>Program: ShowOutput(context)
+    Program->>User: Display results
+```
+
 ## TODO
 
 There is still a lot of work to be done around `Program.cs` and the main datastructures behind `MessageBoard.cs`.
